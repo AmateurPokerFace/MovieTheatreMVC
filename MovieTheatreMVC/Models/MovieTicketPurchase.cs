@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieTheatreMVC.Models
 {
@@ -28,6 +29,20 @@ namespace MovieTheatreMVC.Models
         [Required]
         public string MovieShowTime { get; set; }
 
+        //Table relationships beginning
+        public int CustomerId { get; set; }
+        [ValidateNever]
+        public List<Customer> Customers { get; set; }
+
+        public int MovieId { get; set; }
+        [ValidateNever]
+        public Movie Movie { get; set; }
+
+        public int TheatreId { get; set; }
+        [ValidateNever]
+        public Theatre Theatre { get; set; }
+
+        //Table relationships end
 
     }
 }

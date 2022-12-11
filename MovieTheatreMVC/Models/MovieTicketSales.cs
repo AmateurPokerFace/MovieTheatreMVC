@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace MovieTheatreMVC.Models
@@ -28,6 +29,26 @@ namespace MovieTheatreMVC.Models
 
         [Required]
         public decimal GrossSales { get; set; }
+
+        //table relationships beginning
+        public int MovieId { get; set; }
+        [ValidateNever]
+        public Movie Movie { get; set; }
+
+        public int CustomerId { get; set; }
+        [ValidateNever]
+        public List<Customer> Customers { get; set; }
+
+        public int MovieTicketPurchaseId { get; set; }
+        [ValidateNever]
+        public List<MovieTicketPurchase> MovieTicketPurchase { get; set; }
+
+        public int MovieTicketId { get; set; }
+        [ValidateNever]
+        public MovieTicket MovieTicket { get; set; }
+        //table relationships ending
+
+
 
         public void SubtractFromGrossSales(decimal amountToSubtract) 
         {
