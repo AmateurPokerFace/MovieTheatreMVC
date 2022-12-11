@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieTheatreMVC.Models
@@ -16,7 +17,12 @@ namespace MovieTheatreMVC.Models
 
         [Required]
         public int MovieId { get; set; }
+
         [NotMapped]
-        public List<Movie> MoviesDirected { get; set; }
+        public Movie Movie { get; set; }
+
+        [NotMapped]
+        [ValidateNever]
+        public List<Movie> MoviesDirected { get; set; } 
     }
 }

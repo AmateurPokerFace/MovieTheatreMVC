@@ -1,0 +1,12 @@
+﻿@model Genre
+
+<form method="post">
+    <div>
+        <label asp-for="GenreName"></label>
+        <input asp-for="GenreName" required/>
+    </div>
+    <br />
+    <a asp-action="Index" class="btn btn-danger">Cancel</a>
+    <input hidden="hidden" asp-for="Id"/>
+    <button type="submit" class="btn btn-primary">Save edit</button>
+</form> 

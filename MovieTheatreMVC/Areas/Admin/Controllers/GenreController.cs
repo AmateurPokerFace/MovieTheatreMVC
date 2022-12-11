@@ -19,6 +19,20 @@ namespace MovieTheatreMVC.Areas.Admin.Controllers
             return View();
         }
 
+        public IActionResult Genres() 
+        {
+            List<Genre> genres = _context.Genres.ToList();
+
+            if (genres != null && genres.Count > 0)
+            {
+                genres = genres.OrderBy(x => x.GenreName).ToList();
+                return View(genres);
+            }
+
+            // send to an error page in the future
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult AddGenre()
         {
             AddGenreViewModel model = new AddGenreViewModel();
@@ -45,6 +59,31 @@ namespace MovieTheatreMVC.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index)); // send to a success page in the future
             }
             return View(model);
+        }
+
+        public IActionResult EditGenreName(int id) 
+        {
+            Genre genre = _context.Genres.Find(id);
+            if (genre == null) 
+            {
+                // send to an error page in the future
+                return RedirectToAction(nameof(Genres));
+            }
+            return View(genre);
+        }
+
+        [HttpPost]
+        public IActionResult EditGenreName(Genre genre)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Genres.Update(genre);
+                _context.SaveChanges();
+
+                return RedirectToAction(nameof(Genres)); // send to a success page in the future
+            }
+
+            return View(genre);
         }
     }
 }

@@ -24,10 +24,10 @@ namespace MovieTheatreMVC.Models
 
         public Genre Genre { get; set; }
 
-        public int ActorId { get; set; }
         [ValidateNever]
         public List<Actor> Cast { get; set; }
 
+        [ValidateNever]
         public List<Director> Directors { get; set; }
 
         public string AgeRestriction { get; set; }

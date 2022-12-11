@@ -1,0 +1,26 @@
+﻿@model List<Genre>
+
+    <a asp-action="AddGenre" class="btn btn-primary">Add new genre</a>
+    <br />
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Edit Name</th>
+                    <th scope="col">View Movies</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var genre in Model)
+                {
+                    <tr>
+                        <td>@genre.GenreName</td>
+                        <td><a asp-action="EditGenreName" asp-area="Admin" asp-route-id="@genre.Id" class="btn-link">Edit</a></td>
+                        <td>@*<a asp-route-id="@genre.Id">*@View@*</a>*@</td>
+                    </tr>
+                }
+            </tbody> 
+        </table>
+    </div>
+    
