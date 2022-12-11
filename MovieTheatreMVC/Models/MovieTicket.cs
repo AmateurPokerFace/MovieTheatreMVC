@@ -17,7 +17,12 @@ namespace MovieTheatreMVC.Models
         [Required]
         public bool HasPromoCode { get; set; }
 
-        
+        public int MovieId { get; set; }
+        [ValidateNever]
+        public Movie Movie { get; set; }
 
+        public int TheatreId { get; set; }
+        [ValidateNever]
+        public Theatre Theatre { get; set; }
     }
 }

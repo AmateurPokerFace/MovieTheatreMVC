@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieTheatreMVC.Models
 {
@@ -6,34 +7,36 @@ namespace MovieTheatreMVC.Models
     {
         public Movie()
         {
-            Genres = new List<string>();
-            Cast= new List<string>();
-            Directors = new List<string>();
-            AgeRestriction = new List<string>();
-            ViewingOptions = new List<string>();
+            Genres = new List<Genre>();
+            Cast= new List<Actor>();
+            Directors = new List<Director>();
         }
 
         [Key]
         public int Id { get; set; }
         
-        public DateOnly ReleaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; }
         
-        public TimeOnly RunningTime { get; set; }
+        public int RunningTimeMinutes { get; set; }
         
         public string Description { get; set; }
 
         public string Title { get; set; }
 
-        public List<string> Genres { get; set; }
-        
-        public List<string> Cast { get; set; }
+        public List<Genre> Genres { get; set; }
 
-        public List<string> Directors { get; set; }
+        public int ActorId { get; set; }
+        [ValidateNever]
+        public List<Actor> Cast { get; set; }
 
-        public List<string> AgeRestriction { get; set; }
+        public List<Director> Directors { get; set; }
 
-        public List<string> ViewingOptions { get; set; }
+        public string AgeRestriction { get; set; }
 
         public string ImagePath { get; set; }
+
+        public bool CanPurchaseTickets { get; set; }
+
+        public decimal  BoxOffice { get; set; }
     }
 }

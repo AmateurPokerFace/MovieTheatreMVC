@@ -32,16 +32,10 @@ namespace MovieTheatreMVC.Models
         //Table relationships beginning
         public int CustomerId { get; set; }
         [ValidateNever]
-        public List<Customer> Customers { get; set; }
+        public Customer Customer { get; set; }
 
-        public int MovieId { get; set; }
-        [ValidateNever]
-        public Movie Movie { get; set; }
-
-        public int TheatreId { get; set; }
-        [ValidateNever]
-        public Theatre Theatre { get; set; }
-
+        public int TicketId { get; set; }
+        public MovieTicket Ticket { get; set; }
         //Table relationships end
 
     }
