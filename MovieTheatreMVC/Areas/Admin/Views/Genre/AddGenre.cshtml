@@ -1,0 +1,11 @@
+﻿@using MovieTheatreMVC.Models.ViewModels.Areas.AdminAreaViewModels.Controllers.GenreControllerViewModels;
+@model AddGenreViewModel
+ 
+<form method="post">
+    <div>
+        <label asp-for="GenreName"></label>
+        <input asp-for="GenreName" required/>
+    </div>
+    <a asp-action="Index" class="btn btn-danger">Cancel</a>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form> 

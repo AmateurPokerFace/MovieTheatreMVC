@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace MovieTheatreMVC.Models
 {
-    public class MovieTheatreDbContext : DbContext
+    public class MovieTheatreDbContext : IdentityDbContext
     {
         public MovieTheatreDbContext(DbContextOptions<MovieTheatreDbContext> options) : base(options){}
 

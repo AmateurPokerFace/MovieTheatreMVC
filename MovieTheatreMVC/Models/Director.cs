@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieTheatreMVC.Models
 {
@@ -13,11 +14,9 @@ namespace MovieTheatreMVC.Models
         [Required]
         public string LastName { get; set; }
 
-        public DateTime Birthday { get; set; }
-
-        public string Gender { get; set; }
-
+        [Required]
         public int MovieId { get; set; }
+        [NotMapped]
         public List<Movie> MoviesDirected { get; set; }
     }
 }

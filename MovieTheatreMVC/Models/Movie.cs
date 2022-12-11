@@ -7,7 +7,6 @@ namespace MovieTheatreMVC.Models
     {
         public Movie()
         {
-            Genres = new List<Genre>();
             Cast= new List<Actor>();
             Directors = new List<Director>();
         }
@@ -23,7 +22,7 @@ namespace MovieTheatreMVC.Models
 
         public string Title { get; set; }
 
-        public List<Genre> Genres { get; set; }
+        public Genre Genre { get; set; }
 
         public int ActorId { get; set; }
         [ValidateNever]
