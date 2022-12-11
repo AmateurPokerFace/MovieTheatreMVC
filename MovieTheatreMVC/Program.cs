@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using MovieTheatreMVC.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<MovieTheatreDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MovieTheatreDb"));
+});
 
 var app = builder.Build();
 
