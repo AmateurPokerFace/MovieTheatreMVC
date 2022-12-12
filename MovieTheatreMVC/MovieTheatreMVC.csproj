@@ -23,7 +23,8 @@
     <Folder Include="Areas\Customer\Controllers\" />
     <Folder Include="Areas\Customer\Data\" />
     <Folder Include="Models\ViewModels\Areas\CustomerAreaViewModels\" />
-    <Folder Include="wwwroot\actors\" />
+    <Folder Include="wwwroot\actors\profile\" />
+    <Folder Include="wwwroot\actors\unknown\" />
     <Folder Include="wwwroot\directors\" />
     <Folder Include="wwwroot\movies\covers\" />
   </ItemGroup>

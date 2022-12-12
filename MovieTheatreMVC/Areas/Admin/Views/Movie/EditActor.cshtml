@@ -1,0 +1,27 @@
+﻿@using MovieTheatreMVC.Models.ViewModels.Areas.AdminAreaViewModels.Controllers.MovieControlleViewModels;
+@model EditActorViewModel
+
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <label asp-for="FirstName" class="form-label"></label>
+        <input asp-for="FirstName" class="form-control" required />
+    </div>
+
+    <div>
+        <label asp-for="LastName" class="form-label"></label>
+        <input asp-for="LastName" class="form-control" required />
+    </div> 
+
+    <div>
+        <label asp-for="ActorProfileImage" class="form-label"></label>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Choose a file</label>
+            <input class="form-control" asp-for="ActorProfileImage" id="formFile">
+        </div> 
+    </div>
+
+    <a class="btn btn-danger">Cancel</a>
+    
+    <input type="hidden" asp-for="ActorId"/>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>

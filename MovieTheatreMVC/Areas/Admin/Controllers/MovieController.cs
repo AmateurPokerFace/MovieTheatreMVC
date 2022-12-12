@@ -115,6 +115,8 @@ namespace MovieTheatreMVC.Areas.Admin.Controllers
 
                     await _context.Movies.AddAsync(movie);
                     await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Movies)); // return a success alert in the future
                 }
                  
             }
@@ -203,11 +205,107 @@ namespace MovieTheatreMVC.Areas.Admin.Controllers
             //{
             //    Actor actor1 = new Actor { FirstName = actor.FirstName, LastName = actor.LastName };
             //    _context.Actors.Add(actor1);
-                
+
             //    await _context.SaveChangesAsync();
             //}
-                 
+
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Actors()
+        {
+            var actorsDbQuery = _context.Actors.ToList();
+            List<ActorsViewModel> actors = new List<ActorsViewModel>();
+
+            foreach (var actor in actorsDbQuery)
+            {
+                ActorsViewModel model = new ActorsViewModel
+                { 
+                    FullName = $"{actor.FirstName} {actor.LastName}",
+                    ActorImagePath = actor.ActorImagePath,
+                    Id = actor.Id
+                };
+
+                if (model != null)
+                {
+                    actors.Add(model);
+                }
+            }
+
+            if (actors != null && actors.Count > 0)
+            {
+                actors = actors.OrderBy(x => x.FullName).ToList();
+            }
+
+            return View(actors);
+        }
+
+
+        public async Task<IActionResult> EditActor(int id)
+        {
+            Actor actor = await _context.Actors.FindAsync(id);
+
+            if (actor == null)
+            {
+                return RedirectToAction(nameof(Actors));
+            }
+
+            EditActorViewModel model = new EditActorViewModel 
+            {
+                ActorId = actor.Id,
+                FirstName= actor.FirstName,
+                LastName= actor.LastName,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task <IActionResult> EditActor(EditActorViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Actor actor = await _context.Actors.FindAsync(model.ActorId);
+                if (actor == null) 
+                {
+                    return RedirectToAction(nameof(Actors)); // return error alert in the future (no actor exists in the database with the provided id)
+                }
+
+                if (model.ActorProfileImage != null)
+                {
+
+                    string folder = "actors/profile/";
+                    folder += Guid.NewGuid().ToString() + "_" + model.ActorProfileImage.FileName;
+
+                    string serverFoler = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+
+                    await model.ActorProfileImage.CopyToAsync(new FileStream(serverFoler, FileMode.Create));
+
+                    actor.FirstName = model.FirstName;
+                    actor.LastName = model.LastName;
+                    actor.ActorImagePath = $"/{folder}";
+                    
+
+                    _context.Actors.Update(actor);
+                    await _context.SaveChangesAsync();
+
+                    //return a message stating that the actor's profile picture was updated
+                }
+                else
+                {
+                    actor.FirstName = model.FirstName;
+                    actor.LastName = model.LastName;
+
+                    _context.Actors.Update(actor);
+                    await _context.SaveChangesAsync();
+
+                    //return a message stating that the actor was updated
+                }
+
+                return RedirectToAction(nameof(Actors)); 
+            }
+
+            return View(model);
         }
     }
 }
