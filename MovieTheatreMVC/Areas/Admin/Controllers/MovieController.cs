@@ -30,6 +30,10 @@ namespace MovieTheatreMVC.Areas.Admin.Controllers
         {
             List<Movie> movies = _context.Movies.ToList();
 
+            if (movies != null && movies.Count > 0)
+            {
+                movies = movies.OrderByDescending(x => x.ReleaseDate).ToList();
+            }
             return View(movies);
         }
 
