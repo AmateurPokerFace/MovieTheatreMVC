@@ -1,48 +1,15 @@
-﻿@model List<Movie>
+﻿@using MovieTheatreMVC.Models.ViewModels.Areas.AdminAreaViewModels.Controllers.MovieControlleViewModels;
+@model List<MoviesViewModel>
 
 @if(Model != null && Model.Count > 0)
 {
     <div class="row">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach (var movie in Model)
-    {
-        @*<div class="col-md-6 col-xs-6 border-primary mb-3">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-12">
-                        <div class="card-header text-white bg-body">
-                            <p class="card-text">
-                                <h6 class="card-title">
-                                    @movie.Title
-                                </h6>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-6" >
-                            
-                        <img src="@movie.MovieCoverImagePath"  class="img-thumbnail bg-dark" alt="@movie.Title">
-                         
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-body">
-                            <p class="card-text">@movie.Description</p>
-                            <p class="card-text"><b>Genre: </b>TestGenre</p>
-                            <p class="card-text"><b>Release Date: </b>@movie.ReleaseDate.ToString("dd MMM yy")</p>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card-footer ">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
-            
+            @foreach (var movie in Model)
+            { 
                 <div class="col">
                     <div class="card h-100">
-                         <div class="text-center" style="height: 30rem">
+                            <div class="text-center" style="height: 30rem">
                         <img src="@movie.MovieCoverImagePath" class="card-img-top mh-100" alt="@movie.Title">
                         </div>
                         <div class="card-body">
@@ -50,16 +17,15 @@
                             <p class="card-text">@movie.Description</p>
                             <p class="card-text">Tickets available: @movie.CanPurchaseTickets</p>
                             <p class="card-text">Rated @movie.AgeRestriction</p>
-                            <p class="card-text">Run time: @movie.RunningTimeMinutes</p>
-                            <p class="card-text">Genre: Insert Genre Here</p>
+                            <p class="card-text">Run time: @movie.RunTime</p>
+                            <p class="card-text">Genre: @movie.GenreName</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">Release date: @movie.ReleaseDate.ToShortDateString()</small>
                         </div>
                     </div>
                 </div>
-            
-    }
+            }
         </div>
-</div>
+    </div>
 }

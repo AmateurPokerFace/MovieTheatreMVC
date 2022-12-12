@@ -28,7 +28,48 @@ namespace MovieTheatreMVC.Areas.Admin.Controllers
 
         public IActionResult Movies() 
         {
-            List<Movie> movies = _context.Movies.ToList();
+            List<MoviesViewModel> movies = new List<MoviesViewModel>();
+
+            var movieTableQueries = (from m in _context.Movies
+                                     join g in _context.Genres
+                                     on m.GenreId equals g.Id
+                                     select new
+                                     {
+                                         m.Id,
+                                         m.ReleaseDate,
+                                         m.RunningTimeMinutes,
+                                         m.Description,
+                                         m.Title,
+                                         g.GenreName,
+                                         m.AgeRestriction,
+                                         m.MovieCoverImagePath,
+                                         m.CanPurchaseTickets,
+                                     });
+
+            if (movieTableQueries != null && movieTableQueries.Count() > 0)
+            {
+                foreach (var movieTableQuery in movieTableQueries)
+                {
+                    MoviesViewModel modelHelper = new MoviesViewModel
+                    { 
+                        Id= movieTableQuery.Id,
+                        ReleaseDate= movieTableQuery.ReleaseDate,
+                        RunningTimeMinutes= movieTableQuery.RunningTimeMinutes,
+                        Description= movieTableQuery.Description,
+                        Title= movieTableQuery.Title,
+                        GenreName= movieTableQuery.GenreName,
+                        AgeRestriction= movieTableQuery.AgeRestriction,
+                        MovieCoverImagePath = movieTableQuery.MovieCoverImagePath,
+                        CanPurchaseTickets= movieTableQuery.CanPurchaseTickets,
+                    };
+
+                    if (modelHelper != null)
+                    {
+                        modelHelper.RunTime = TimeSpan.FromMinutes(modelHelper.RunningTimeMinutes);
+                        movies.Add(modelHelper);
+                    }
+                }
+            }
 
             if (movies != null && movies.Count > 0)
             {
