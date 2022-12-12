@@ -26,6 +26,8 @@ namespace MovieTheatreMVC.Models
         public string Title { get; set; }
 
         [Required]
+        public int GenreId { get; set; }
+        [ValidateNever]
         public Genre Genre { get; set; }
 
         [ValidateNever]
@@ -37,7 +39,7 @@ namespace MovieTheatreMVC.Models
         [Required]
         public string AgeRestriction { get; set; }
 
-        public string ImagePath { get; set; }
+        public string MovieCoverImagePath { get; set; }
 
         [Required]
         public bool CanPurchaseTickets { get; set; }

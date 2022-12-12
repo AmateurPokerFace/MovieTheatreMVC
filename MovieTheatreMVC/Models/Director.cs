@@ -6,6 +6,11 @@ namespace MovieTheatreMVC.Models
 {
     public class Director
     {
+        public Director()
+        {
+            MoviesDirected = new List<DirectorCredit>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -17,14 +22,8 @@ namespace MovieTheatreMVC.Models
 
         public string DirectorImagePath { get; set; }
 
-        [Required]
-        public int MovieId { get; set; }
-
-        [NotMapped]
-        public Movie Movie { get; set; }
-
         [NotMapped]
         [ValidateNever]
-        public List<Movie> MoviesDirected { get; set; } 
+        public List<DirectorCredit> MoviesDirected { get; set; } 
     }
 }

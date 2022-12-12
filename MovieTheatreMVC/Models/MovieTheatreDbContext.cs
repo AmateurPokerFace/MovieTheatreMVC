@@ -16,5 +16,7 @@ namespace MovieTheatreMVC.Models
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Director> Directors { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<ActorCredit> CreditedActors { get; set; }
+        public DbSet<DirectorCredit> CreditedDirectors { get; set; }
     }
 }

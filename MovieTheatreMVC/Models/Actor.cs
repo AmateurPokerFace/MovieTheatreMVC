@@ -6,6 +6,12 @@ namespace MovieTheatreMVC.Models
 {
     public class Actor
     {
+
+        public Actor()
+        {
+            CreditedMovies = new List<ActorCredit>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -15,16 +21,11 @@ namespace MovieTheatreMVC.Models
         [Required]
         public string LastName { get; set; }
 
-        public string ActorImagePath { get; set; }
-
-        [Required]
-        public int MovieId { get; set; }
-        [NotMapped]
-        public Movie Movie { get; set; }
+        public string? ActorImagePath { get; set; }
 
         [ValidateNever]
         [NotMapped]
-        public List<Movie> MoviesStarredIn { get; set; }
+        public List<ActorCredit> CreditedMovies { get; set; }
 
     }
 }

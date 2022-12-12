@@ -17,15 +17,19 @@ namespace MovieTheatreMVC.Models.ViewModels.Areas.AdminAreaViewModels.Controller
         [Required]
         public string Title { get; set; }
 
+        // ADD GENRE ID
+
         [Required]
-        public Genre Genre { get; set; }
+        public string GenreString { get; set; }
 
         [Required]
         public string AgeRestriction { get; set; }
 
-        public string ImagePath { get; set; }
-
         [Required]
         public bool CanPurchaseTickets { get; set; }
+
+        [Required]
+        [Display(Name = "Enter a Cover Image for the Movie")]
+        public IFormFile MovieCoverImage { get; set; }
     }
 }

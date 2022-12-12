@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieTheatreMVC.Models;
 
@@ -11,9 +12,10 @@ using MovieTheatreMVC.Models;
 namespace MovieTheatreMVC.Migrations
 {
     [DbContext(typeof(MovieTheatreDbContext))]
-    partial class MovieTheatreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221212050900_added_two_new_tables_for_crediting_cast")]
+    partial class added_two_new_tables_for_crediting_cast
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -233,6 +235,7 @@ namespace MovieTheatreMVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ActorImagePath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")

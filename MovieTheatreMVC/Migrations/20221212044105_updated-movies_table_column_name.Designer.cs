@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieTheatreMVC.Models;
 
@@ -11,9 +12,10 @@ using MovieTheatreMVC.Models;
 namespace MovieTheatreMVC.Migrations
 {
     [DbContext(typeof(MovieTheatreDbContext))]
-    partial class MovieTheatreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221212044105_updated-movies_table_column_name")]
+    partial class updatedmovies_table_column_name
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -233,6 +235,7 @@ namespace MovieTheatreMVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ActorImagePath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -243,7 +246,7 @@ namespace MovieTheatreMVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MovieId")
+                    b.Property<int>("MovieId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -251,43 +254,6 @@ namespace MovieTheatreMVC.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("Actors");
-                });
-
-            modelBuilder.Entity("MovieTheatreMVC.Models.ActorCredit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ActorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ActorName")
-                        .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MovieTitle")
-                        .IsRequired()
-                        .HasMaxLength(265)
-                        .HasColumnType("nvarchar(265)");
-
-                    b.Property<string>("RoleName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActorId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("CreditedActors");
                 });
 
             modelBuilder.Entity("MovieTheatreMVC.Models.Admin", b =>
@@ -339,7 +305,7 @@ namespace MovieTheatreMVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MovieId")
+                    b.Property<int>("MovieId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -347,34 +313,6 @@ namespace MovieTheatreMVC.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("Directors");
-                });
-
-            modelBuilder.Entity("MovieTheatreMVC.Models.DirectorCredit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("DirectorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MovieTitle")
-                        .IsRequired()
-                        .HasMaxLength(265)
-                        .HasColumnType("nvarchar(265)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DirectorId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("CreditedDirectors");
                 });
 
             modelBuilder.Entity("MovieTheatreMVC.Models.Genre", b =>
@@ -615,52 +553,18 @@ namespace MovieTheatreMVC.Migrations
                 {
                     b.HasOne("MovieTheatreMVC.Models.Movie", null)
                         .WithMany("Cast")
-                        .HasForeignKey("MovieId");
-                });
-
-            modelBuilder.Entity("MovieTheatreMVC.Models.ActorCredit", b =>
-                {
-                    b.HasOne("MovieTheatreMVC.Models.Actor", "Actor")
-                        .WithMany()
-                        .HasForeignKey("ActorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MovieTheatreMVC.Models.Movie", "Movie")
-                        .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Actor");
-
-                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("MovieTheatreMVC.Models.Director", b =>
                 {
                     b.HasOne("MovieTheatreMVC.Models.Movie", null)
                         .WithMany("Directors")
-                        .HasForeignKey("MovieId");
-                });
-
-            modelBuilder.Entity("MovieTheatreMVC.Models.DirectorCredit", b =>
-                {
-                    b.HasOne("MovieTheatreMVC.Models.Director", "Director")
-                        .WithMany()
-                        .HasForeignKey("DirectorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MovieTheatreMVC.Models.Movie", "Movie")
-                        .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Director");
-
-                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("MovieTheatreMVC.Models.Movie", b =>

@@ -1,5 +1,30 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model List<Movie>
+
+    @{
+        int recordCount = 0;
+    }
+@if(Model != null && Model.Count > 0)
+{
+    int v = 0;
+@foreach (var item in Model)
+{
+    <div class="carousel-inner">
+        <div class="item@(v == 0 ? " active" : "")">
+            <img src @item.MovieCoverImagePath/>
+        </div>
+    </div>
+    v++;
+}
+
+    
+
+        @*<div>
+            <img src="@movie.MovieCoverImagePath" class="img-thumbnail"/>
+            <h3>@movie.Title</h3>
+            <h4>Rated @movie.AgeRestriction</h4>
+            <h4>Tickets available to purchase: @movie.CanPurchaseTickets</h4>
+        </div>    
+        <br /><br />*@
+            
+         
 }

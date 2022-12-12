@@ -23,6 +23,9 @@
     <Folder Include="Areas\Customer\Controllers\" />
     <Folder Include="Areas\Customer\Data\" />
     <Folder Include="Models\ViewModels\Areas\CustomerAreaViewModels\" />
+    <Folder Include="wwwroot\actors\" />
+    <Folder Include="wwwroot\directors\" />
+    <Folder Include="wwwroot\movies\covers\" />
   </ItemGroup>
 
 </Project>
