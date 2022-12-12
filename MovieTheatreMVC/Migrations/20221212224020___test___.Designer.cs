@@ -12,8 +12,8 @@ using MovieTheatreMVC.Models;
 namespace MovieTheatreMVC.Migrations
 {
     [DbContext(typeof(MovieTheatreDbContext))]
-    [Migration("20221212062857___test")]
-    partial class __test
+    [Migration("20221212224020___test___")]
+    partial class __test___
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -245,12 +245,7 @@ namespace MovieTheatreMVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MovieId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
 
                     b.ToTable("Actors");
                 });
@@ -265,11 +260,6 @@ namespace MovieTheatreMVC.Migrations
 
                     b.Property<int>("ActorId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ActorName")
-                        .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
 
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
@@ -330,7 +320,6 @@ namespace MovieTheatreMVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("DirectorImagePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -341,12 +330,7 @@ namespace MovieTheatreMVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MovieId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
 
                     b.ToTable("Directors");
                 });
@@ -423,7 +407,6 @@ namespace MovieTheatreMVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("MovieCoverImagePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ReleaseDate")
@@ -613,13 +596,6 @@ namespace MovieTheatreMVC.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MovieTheatreMVC.Models.Actor", b =>
-                {
-                    b.HasOne("MovieTheatreMVC.Models.Movie", null)
-                        .WithMany("Cast")
-                        .HasForeignKey("MovieId");
-                });
-
             modelBuilder.Entity("MovieTheatreMVC.Models.ActorCredit", b =>
                 {
                     b.HasOne("MovieTheatreMVC.Models.Actor", "Actor")
@@ -637,13 +613,6 @@ namespace MovieTheatreMVC.Migrations
                     b.Navigation("Actor");
 
                     b.Navigation("Movie");
-                });
-
-            modelBuilder.Entity("MovieTheatreMVC.Models.Director", b =>
-                {
-                    b.HasOne("MovieTheatreMVC.Models.Movie", null)
-                        .WithMany("Directors")
-                        .HasForeignKey("MovieId");
                 });
 
             modelBuilder.Entity("MovieTheatreMVC.Models.DirectorCredit", b =>
@@ -717,13 +686,6 @@ namespace MovieTheatreMVC.Migrations
             modelBuilder.Entity("MovieTheatreMVC.Models.Customer", b =>
                 {
                     b.Navigation("MovieTicketPurchases");
-                });
-
-            modelBuilder.Entity("MovieTheatreMVC.Models.Movie", b =>
-                {
-                    b.Navigation("Cast");
-
-                    b.Navigation("Directors");
                 });
 #pragma warning restore 612, 618
         }

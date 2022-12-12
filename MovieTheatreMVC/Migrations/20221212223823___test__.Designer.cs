@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieTheatreMVC.Models;
 
@@ -11,9 +12,10 @@ using MovieTheatreMVC.Models;
 namespace MovieTheatreMVC.Migrations
 {
     [DbContext(typeof(MovieTheatreDbContext))]
-    partial class MovieTheatreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221212223823___test__")]
+    partial class __test__
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,7 +245,12 @@ namespace MovieTheatreMVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MovieId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
 
                     b.ToTable("Actors");
                 });
@@ -328,7 +335,12 @@ namespace MovieTheatreMVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MovieId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
 
                     b.ToTable("Directors");
                 });
@@ -594,6 +606,13 @@ namespace MovieTheatreMVC.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MovieTheatreMVC.Models.Actor", b =>
+                {
+                    b.HasOne("MovieTheatreMVC.Models.Movie", null)
+                        .WithMany("Cast")
+                        .HasForeignKey("MovieId");
+                });
+
             modelBuilder.Entity("MovieTheatreMVC.Models.ActorCredit", b =>
                 {
                     b.HasOne("MovieTheatreMVC.Models.Actor", "Actor")
@@ -611,6 +630,13 @@ namespace MovieTheatreMVC.Migrations
                     b.Navigation("Actor");
 
                     b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("MovieTheatreMVC.Models.Director", b =>
+                {
+                    b.HasOne("MovieTheatreMVC.Models.Movie", null)
+                        .WithMany("Directors")
+                        .HasForeignKey("MovieId");
                 });
 
             modelBuilder.Entity("MovieTheatreMVC.Models.DirectorCredit", b =>
@@ -684,6 +710,13 @@ namespace MovieTheatreMVC.Migrations
             modelBuilder.Entity("MovieTheatreMVC.Models.Customer", b =>
                 {
                     b.Navigation("MovieTicketPurchases");
+                });
+
+            modelBuilder.Entity("MovieTheatreMVC.Models.Movie", b =>
+                {
+                    b.Navigation("Cast");
+
+                    b.Navigation("Directors");
                 });
 #pragma warning restore 612, 618
         }

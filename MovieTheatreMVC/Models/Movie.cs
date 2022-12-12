@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieTheatreMVC.Models
 {
@@ -31,15 +32,17 @@ namespace MovieTheatreMVC.Models
         public Genre Genre { get; set; }
 
         [ValidateNever]
+        [NotMapped]
         public List<Actor> Cast { get; set; }
 
         [ValidateNever]
+        [NotMapped]
         public List<Director> Directors { get; set; }
 
         [Required]
         public string AgeRestriction { get; set; }
 
-        public string MovieCoverImagePath { get; set; }
+        public string? MovieCoverImagePath { get; set; }
 
         [Required]
         public bool CanPurchaseTickets { get; set; }

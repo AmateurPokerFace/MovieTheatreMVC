@@ -7,10 +7,6 @@ namespace MovieTheatreMVC.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(35,MinimumLength =3)]
-        public string ActorName { get; set; }
-
         public string RoleName { get; set; }
 
         [Required]
