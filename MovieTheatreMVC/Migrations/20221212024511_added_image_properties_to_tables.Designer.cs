@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieTheatreMVC.Models;
 
@@ -11,9 +12,10 @@ using MovieTheatreMVC.Models;
 namespace MovieTheatreMVC.Migrations
 {
     [DbContext(typeof(MovieTheatreDbContext))]
-    partial class MovieTheatreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221212024511_added_image_properties_to_tables")]
+    partial class added_image_properties_to_tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

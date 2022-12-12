@@ -24,5 +24,7 @@ namespace MovieTheatreMVC.Models
 
         [Required]
         public string TheatreName { get; set; }
+
+        public string TheatreLogoImagePath { get; set; }
     }
 }

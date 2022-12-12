@@ -1,22 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
-namespace MovieTheatreMVC.Models
+namespace MovieTheatreMVC.Models.ViewModels.Areas.AdminAreaViewModels.Controllers.MovieControlleViewModels
 {
-    public class Movie
+    public class AddMovieViewModel
     {
-        public Movie()
-        {
-            Cast= new List<Actor>();
-            Directors = new List<Director>();
-        }
-
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public DateTime ReleaseDate { get; set; }
 
+        [Required]
         public int RunningTimeMinutes { get; set; } = 0;
 
         [Required]
@@ -28,12 +20,6 @@ namespace MovieTheatreMVC.Models
         [Required]
         public Genre Genre { get; set; }
 
-        [ValidateNever]
-        public List<Actor> Cast { get; set; }
-
-        [ValidateNever]
-        public List<Director> Directors { get; set; }
-
         [Required]
         public string AgeRestriction { get; set; }
 
@@ -41,8 +27,5 @@ namespace MovieTheatreMVC.Models
 
         [Required]
         public bool CanPurchaseTickets { get; set; }
-
-        [Required]
-        public decimal BoxOffice { get; set; } = 0;
     }
 }

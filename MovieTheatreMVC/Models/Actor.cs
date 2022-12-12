@@ -15,6 +15,8 @@ namespace MovieTheatreMVC.Models
         [Required]
         public string LastName { get; set; }
 
+        public string ActorImagePath { get; set; }
+
         [Required]
         public int MovieId { get; set; }
         [NotMapped]
